@@ -16,7 +16,7 @@ module.exports ={
   devServer:{
     inline:true,
     contentBase:'./docs',
-    port:4444,
+    port:4445,
     historyApiFallback: true,
   }
   ,

@@ -66,8 +66,10 @@
   ],
   "homepage": "https://github.com/guiqui/react-timeline-gantt",
   "dependencies": {
+    "moment": "^2.22.2",
     "opencollective": "^1.0.3",
-    "opencollective-postinstall": "^2.0.1"
+    "opencollective-postinstall": "^2.0.1",
+    "react-sizeme": "^2.5.2"
   },
   "collective": {
     "type": "opencollective",
