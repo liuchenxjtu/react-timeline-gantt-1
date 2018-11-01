@@ -1,6 +1,7 @@
 const defvalues={
     header:{
-        top:{
+        month:{
+            dateFormat:'MMM  YYYY',
             style:{
                 backgroundColor:"#333333",
                 fontSize:10,
@@ -8,19 +9,18 @@ const defvalues={
                 textAlign:'center'
             }
         },
-        middle:{
+        dayOfWeek:{
             style:{
                 backgroundColor:"chocolate"
             },
             selectedStyle:{
                 backgroundColor:"#b13525",
-                fontWeight: 'bold' 
+                fontWeight: 'bold'
             }
         },
-        bottom:{
+        dayTime:{
             style:{
               background:"grey",
-              color:'white',
               fontSize:9
             },
             selectedStyle:{
@@ -54,8 +54,8 @@ const defvalues={
                 }
               }
         }
-        
-  
+
+
     },
     dataViewPort:{
         rows:{
@@ -65,8 +65,8 @@ const defvalues={
           }
         },
         task:{
-            showLabel:false,
-            
+            showLabel:true,
+
             style:{
                 position: 'absolute',
                 borderRadius:14,
@@ -92,7 +92,7 @@ const defvalues={
   }
 
 
-  
+
 
 class Config {
     constructor(){
@@ -130,7 +130,7 @@ class Config {
             return false;
         return true;
     }
-    
+
     get values(){
         return this.data;
     }

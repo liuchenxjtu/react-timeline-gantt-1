@@ -7,8 +7,8 @@ export default class DataController{
         this.lower_limit=0;
         this.upper_limit=0;
         this._dataToRender=[];
-        
-       
+
+
     }
     initialise=(start,end,nowposition,daywidth)=>{
         this.nowposition=nowposition
@@ -22,6 +22,7 @@ export default class DataController{
         this.nowposition=nowposition
         this.daywidth=daywidth
         if (this.needData(start,end)){
+            console.log('Need more data');
             this.setLimits(start,end);
             this.loadDataHorizon();
         }
@@ -41,8 +42,9 @@ export default class DataController{
 
     //OnScroll
     loadDataHorizon=()=>{
+        //console.log('load data');
         let lowerLimit=DateHelper.pixelToDate(this.lower_limit,this.nowposition,this.daywidth)
         let upLimit=DateHelper.pixelToDate(this.upper_limit,this.nowposition,this.daywidth)
         this.onHorizonChange(lowerLimit,upLimit)
-    }   
+    }
 }

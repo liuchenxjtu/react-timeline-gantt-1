@@ -38,8 +38,6 @@
     top:0;
     left:0;
     height: 100% ;
-    display:flex;
-    flex-direction: column;
     background-color: #333333;
     overflow: hidden;
     user-select: none;
@@ -63,7 +61,7 @@
 }
 
 
-.timeLine-main-header-top-item{
+.timeLine-main-header-month-item{
     position: absolute;
     display: flex;
     flex-direction: column;
