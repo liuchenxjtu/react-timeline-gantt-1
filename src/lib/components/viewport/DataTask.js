@@ -94,6 +94,8 @@ export default class DataTask extends Component{
     calculateStyle(){
         let configStyle=this.props.isSelected?Config.values.dataViewPort.task.selectedStyle:Config.values.dataViewPort.task.style;
         let backgroundColor= this.props.color?this.props.color:configStyle.backgroundColor
+        if (this.props.item.type==="actual")
+          backgroundColor="red";
         if(this.state.dragging){
             return {...configStyle,backgroundColor: backgroundColor,left:this.state.left,width:this.state.width,height:this.props.height-5,top:2}
         }else{
