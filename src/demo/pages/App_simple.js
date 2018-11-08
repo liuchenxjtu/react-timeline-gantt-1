@@ -32,7 +32,7 @@ class App extends Component{
             "name":"T02",
             "sheet":[
             {
-            "name":1,
+            "name":"1",
             "type":"auto",
             "start":"2018-09-01 00:00",
             "end":"2018-09-01 01:00"
@@ -44,7 +44,7 @@ class App extends Component{
             "end":"2018-09-01 02:00"
             },
             {
-            "name":1,
+            "name":3,
             "type":"actual",
             "start":"2018-09-01 04:00",
             "end":"2018-09-01 05:00"

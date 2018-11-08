@@ -103,7 +103,6 @@ export default class DataTask extends Component{
     }
     render(){
         let style=this.calculateStyle();
-
         return (
         <div
             onMouseDown={(e)=>this.doMouseDown(e,MODE_MOVE)}

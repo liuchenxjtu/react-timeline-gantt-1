@@ -48,9 +48,9 @@ export  class DataViewPort extends Component{
                    new_position=DateHelper.dateToPixel(taskSheet.start,initposition,this.props.dayWidth,this.props.searchStartDate);
                    new_width=DateHelper.dateToPixel(taskSheet.end,initposition,this.props.dayWidth,this.props.searchStartDate)-new_position;
 
-                   console.log('nowposition: '+this.props.nowposition+' initposition: '+initposition+' left '+new_position+' width:'+new_width);
+                  // console.log('nowposition: '+this.props.nowposition+' initposition: '+initposition+' left '+new_position+' width:'+new_width);
                    return(
-                     <DataTask item={item} label={item.name}
+                     <DataTask item={taskSheet} label={taskSheet.name}
                                nowposition={this.props.nowposition}
                                dayWidth={this.props.dayWidth}
                                color={item.color}

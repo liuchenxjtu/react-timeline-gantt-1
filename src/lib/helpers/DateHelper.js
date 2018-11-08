@@ -10,12 +10,11 @@ class DateHelper{
     dateToPixel(input,nowposition,daywidth,startTime){
         let nowDate=new Date(startTime);//
         let inputTime=new Date(input);
-        console.log('input: '+input+' startDate'  +  startTime.format("DD-M-YYYY") +' '+nowDate.getTimezoneOffset()+' inputTime: '+ inputTime+' '+inputTime.getTimezoneOffset());
-        //Day light saving patch
+          //Day light saving patch
         let lightSavingDiff=(inputTime.getTimezoneOffset()-nowDate.getTimezoneOffset())*60*1000;
-        console.log('lightSavingDiff: '+ lightSavingDiff + ' '+nowposition);
+        //console.log('lightSavingDiff: '+ lightSavingDiff + ' '+nowposition);
         let timeDiff = inputTime.getTime() - nowDate.getTime()-lightSavingDiff;
-        console.log('timeDiff: '+ timeDiff + ' '+inputTime.getTime() +' '+nowDate.getTime());
+        //console.log('timeDiff: '+ timeDiff + ' '+inputTime.getTime() +' '+nowDate.getTime());
         let pixelWeight=daywidth/24;//Value in pixels of one hour
         return (timeDiff / MIL_IN_HOUR )*pixelWeight+nowposition;
     }
