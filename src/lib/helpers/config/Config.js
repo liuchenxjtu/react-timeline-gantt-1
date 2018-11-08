@@ -31,7 +31,7 @@ const defvalues={
     },
     taskList:{
         title:{
-            label:"Projects",
+            label:"产线",
             style:{
                 backgroundColor: '#333333',
                 borderBottom: 'solid 1px silver',

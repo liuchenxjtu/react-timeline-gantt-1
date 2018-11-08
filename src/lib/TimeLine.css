@@ -29,7 +29,7 @@
     width: 100%;
     background-color:  rgb(112, 112, 112);
     overflow: hidden;
-    
+
 }
 
 .timeLine-main-header-container{
@@ -99,6 +99,7 @@
     border-top: solid 1px silver;
     text-align: center;
     padding-top: 5px;
+    line-height: 0.5em;
 }
 /* Main Area Data*/
 
@@ -107,8 +108,8 @@
     position: relative;
     overflow: hidden;
     background-color:#fbf9f9;;
-   
-    
+
+
 }
 .timeLine-main-data-container{
     position: relative;
@@ -122,7 +123,7 @@
     position: absolute;
     width: 100%;
     height: 50px;
- 
+
 }
 
 .timeLine-main-data-task{
@@ -147,7 +148,7 @@
     border-radius: 4px;
     cursor: default;
     z-index: 100;
-    
+
 }
 .timeLine-main-data-task-side-linker:hover{
     background-color: black;
@@ -179,7 +180,7 @@
     min-width: 108px;
     display: flex;
     flex-direction: row;
-    
+
 }
 
 .timeLine-side{
@@ -202,7 +203,7 @@
 }
 .squareGrip{
     flex: 0 0 auto;
-   
+
     border-radius: 50%;
     height: 5px;
     width: 5px;
@@ -214,7 +215,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-   
+
 }
 
 .timeLine-side-task-viewPort{
@@ -243,10 +244,9 @@
     color: grey;
     text-align: center;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
     outline: none;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
