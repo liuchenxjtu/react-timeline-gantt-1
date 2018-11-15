@@ -32,19 +32,19 @@ class App extends Component{
             "name":"T02",
             "sheet":[
             {
-            "name":"1",
+            "ticket_id":"1",
             "type":"auto",
             "start":"2018-09-01 00:00",
             "end":"2018-09-01 01:00"
             },
             {
-            "name":2,
+            "ticket_id":2,
             "type":"auto",
             "start":"2018-09-01 01:00",
             "end":"2018-09-01 02:00"
             },
             {
-            "name":3,
+            "ticket_id":3,
             "type":"actual",
             "start":"2018-09-01 04:00",
             "end":"2018-09-01 05:00"
@@ -55,13 +55,13 @@ class App extends Component{
             "name":"J01",
             "sheet":[
             {
-            "name":5,
+            "ticket_id":5,
             "type":"actual",
             "start":"2018-09-01 01:00",
             "end":"2018-09-01 02:00"
             },
             {
-            "name":4,
+            "ticket_id":4,
             "type":"auto",
             "start":"2018-09-01 02:00",
             "end":"2018-09-01 03:00"

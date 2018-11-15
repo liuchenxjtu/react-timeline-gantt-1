@@ -115,7 +115,7 @@ export default class DataTask extends Component{
                 <div  className="timeLine-main-data-task-side-linker"/>
             </div>
             <div style={{overflow:'hidden'}}>
-            {Config.values.dataViewPort.task.showLabel?this.props.item.name:""}
+            {Config.values.dataViewPort.task.showLabel?this.props.item.ticket_id:""}
             </div>
             <div className="timeLine-main-data-task-side"
                  style={{top:0,left:style.width-3,height:style.height}}>
