@@ -50,7 +50,7 @@ export  class DataViewPort extends Component{
 
                   // console.log('nowposition: '+this.props.nowposition+' initposition: '+initposition+' left '+new_position+' width:'+new_width);
                    return(
-                     <DataTask item={taskSheet} label={taskSheet.name}
+                     <DataTask item={taskSheet} label={taskSheet.ticket_id}
                                nowposition={this.props.nowposition}
                                dayWidth={this.props.dayWidth}
                                color={item.color}
