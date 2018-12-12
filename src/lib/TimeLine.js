@@ -32,9 +32,7 @@ class TimeLine extends Component{
         this.pxToScroll=1900;
 
         let dayWidth=this.getDayWidth(this.props.mode);
-        Config.load(this.props.config)
-        //Initialising state
-        console.log('here2');
+        let end = this.props.searchEndDate.diff(this.props.searchStartDate, 'days') + 1;
         this.state={
             currentday:0,//Day that is in the 0px horizontal
             //nowposition is the reference position, this variable support the infinit scrolling by accumulatning scroll times and redefining the 0 position
@@ -42,12 +40,12 @@ class TimeLine extends Component{
             nowposition:0,
             startRow:0,//
             endRow:10,
-            months:DateHelper.calculateMonthData(0,30,0,dayWidth, this.props.searchStartDate,this.props.searchEndDate),
+            months:DateHelper.calculateMonthData(0, end,0,dayWidth, this.props.searchStartDate,this.props.searchEndDate),
             sideStyle:{width:200},
             scrollLeft:0,
             scrollTop:0,
-            numVisibleRows:40,
-            numVisibleDays:60,
+            numVisibleRows:400,
+            numVisibleDays:end,
             dayWidth:dayWidth,
             interactiveMode:false,
             taskToCreate:null,
@@ -99,7 +97,6 @@ class TimeLine extends Component{
         let newNumVisibleRows=Math.ceil(size.height / this.props.itemheight);
         let newNumVisibleDays=this.calcNumVisibleDays(size)
         let rowInfo=this.calculateStartEndRows(newNumVisibleRows,this.props.data,this.state.scrollTop);
-        console.log('here3 ' +this.props.searchStartDate.format("DD-M-YYYY"));
         let months=DateHelper.calculateMonthData(this.state.currentday,this.state.currentday+newNumVisibleDays,this.state.nowposition,this.state.dayWidth,this.props.searchStartDate,this.props.searchEndDate)
         this.setState({
             numVisibleRows:newNumVisibleRows,
@@ -170,10 +167,8 @@ class TimeLine extends Component{
 
         //Check if we need to change moths and load new data
         if (this.changingMonth(currentIndx,currentIndx+this.state.numVisibleDays)){
-            console.log('here4');
             months=DateHelper.calculateMonthData(currentIndx,currentIndx+this.state.numVisibleDays,new_nowposition,this.state.dayWidth,this.props.searchStartDate,this.props.searchEndDate)
         }else{
-            console.log('here5');
             if(new_left !=-1)
                 months=DateHelper.calculateMonthData(currentIndx,currentIndx+this.state.numVisibleDays,new_nowposition,this.state.dayWidth,this.props.searchStartDate,this.props.searchEndDate)
         }
@@ -244,6 +239,27 @@ class TimeLine extends Component{
        this.dragging=false;
     }
 
+    doTouchStart=(e)=>{
+        this.dragging=true;
+        this.draggingPosition=e.touches[0].clientX;
+    }
+    doTouchEnd=(e)=>{
+        this.dragging=false;
+    }
+    doTouchMove=(e)=>{
+        if(this.dragging){
+            let delta=this.draggingPosition-e.touches[0].clientX;
+
+            if (delta!==0){
+                this.draggingPosition=e.touches[0].clientX;
+                this.horizontalChange(this.state.scrollLeft+delta);
+            }
+        }
+    }
+    doTouchCancel=(e)=>{
+        this.dragging=false;
+    }
+
     //Child communicating states
     onTaskListSizing=(delta)=>{
         this.setState((prevState) => {
@@ -264,7 +280,6 @@ class TimeLine extends Component{
 
 
     onStartCreateLink=(task,position)=>{
-        console.log(`Start Link ${task}`)
         this.setState({
             interactiveMode:true,
             taskToCreate:{task:task,position:position}
@@ -274,7 +289,6 @@ class TimeLine extends Component{
 
 
     onFinishCreateLink=(task,position)=>{
-        console.log(`End Link ${task}`)
         if (this.props.onCreateLink && task){
             this.props.onCreateLink({start:this.state.taskToCreate,end:{task:task,position:position}})
         }
@@ -311,7 +325,6 @@ class TimeLine extends Component{
             let scrollLeft=(this.state.currentday*this.state.dayWidth+this.state.nowposition)%this.pxToScroll
             // we recalculate the new scroll Left value
             this.state.scrollLeft=scrollLeft;
-            console.log('here1');
             this.state.months=DateHelper.calculateMonthData(this.state.currentday,this.state.currentday+this.state.numVisibleDays,this.state.nowposition,this.state.dayWidth,this.props.searchStartDate,this.props.searchEndDate)
         }
     }
@@ -332,7 +345,6 @@ class TimeLine extends Component{
     render(){
         this.checkMode();
         this.checkNeeeData();
-        console.log('numVisibleDays: '+this.state.numVisibleDays +'currentday: ' +this.state.currentday +'nowposition: '+this.state.nowposition);
         return (
         <div className="timeLine">
             <div className="timeLine-side-main" style={this.state.sideStyle}>
@@ -360,6 +372,7 @@ class TimeLine extends Component{
                         searchEndDate={this.props.searchEndDate}/>
                 <DataViewPort
                     ref='dataViewPort'
+                    months={this.state.months}
                     searchStartDate={this.props.searchStartDate}
                     searchEndDate={this.props.searchEndDate}
                     scrollLeft={this.state.scrollLeft}
@@ -382,7 +395,7 @@ class TimeLine extends Component{
                     onStartCreateLink={this.onStartCreateLink}
                     onFinishCreateLink={this.onFinishCreateLink}
                     boundaries={{lower:this.state.scrollLeft,upper:this.state.scrollLeft+this.state.size.width}}
-                    onSize={this.onSize}/>
+                    />
                 <LinkViewPort
                     scrollLeft={this.state.scrollLeft}
                     scrollTop={this.state.scrollTop}

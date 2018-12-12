@@ -93,6 +93,12 @@ export default class Header extends Component {
     constructor (props){
         super(props)
     }
+
+    getHeaderWidth() {
+        if (!this.props.months)
+            return 0;
+        return this.props.months.data.reduce((count, item) => count + item.width, 0);
+    }
         //Render Methods
     renderMonth(){
         if (!this.props.months)
@@ -107,7 +113,6 @@ export default class Header extends Component {
         let result=[];
         let months = this.props.searchEndDate.diff(this.props.searchStartDate, 'months');
         let half =parseInt(months/2);
-        console.log('currentday '  +  moment(this.props.currentday).format('D-M-YYYY'));
         let j=0;
         for (let i=0;i<this.props.numVisibleDays;i++){
 
@@ -129,7 +134,7 @@ export default class Header extends Component {
 
         return  <div id="timeline-header" ref="Header"
                     className="timeLine-main-header-viewPort">
-                    <div  className="timeLine-main-header-container" style={{width:DATA_CONTAINER_WIDTH,maxWidth:DATA_CONTAINER_WIDTH}}>
+                    <div  className="timeLine-main-header-container" style={{width: this.getHeaderWidth()}}>
                         {this.renderMonth()}
                         {this.renderTimeHeader()}
                     </div>

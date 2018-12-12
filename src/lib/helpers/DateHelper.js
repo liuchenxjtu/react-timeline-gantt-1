@@ -48,7 +48,7 @@ class DateHelper{
         result['keys']={}
         let currentMonth='';
         let currentKey='';
-        //let startTime=new Date(searchStartDate);
+        // let startTime=new Date(searchStartDate);
         //let endTime=new Date(searchEndDate);
         //let timeDiff = Math.abs(endTime.getTime() - startTime.getTime());
         //let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -58,14 +58,15 @@ class DateHelper{
         let j=0;
         for (let i=start;i<end;i++ ){
             j = j+i;
-            currentMonth=searchStartDate.add(i, 'days')   ;
+            currentMonth=searchStartDate.add(i, 'days');
             currentKey=currentMonth.format("M-YYYY");
+
             //console.log('currentMonth'+ currentMonth.format("DD-M-YYYY") + half +' '+i);
             result['data'].push({
                 key:currentKey,
                 month:currentMonth.format(Config.values.header.month.dateFormat),
-                left:this.dayToPosition(i-currentMonth.date()+1,now,dayWidth),
-                width:currentMonth.daysInMonth()*dayWidth
+                left:this.dayToPosition(i-currentMonth.date()+1, now, dayWidth),
+                width:(this.generateCurrentMonthWidth(currentMonth, searchEndDate))*dayWidth
 
             })
             //console.log('key11'+ JSON.stringify(result));
@@ -75,7 +76,6 @@ class DateHelper{
 
         }
         searchStartDate.add(-j, 'days')
-        console.log('calculateMonthData searchStartDate '  +  searchStartDate);
         return result;
     }
 
@@ -83,6 +83,13 @@ class DateHelper{
         return day * dayWidth +now;
 
     }
+
+    generateCurrentMonthWidth = (currentDay, lastDay) => {
+        if (currentDay.month() === lastDay.month()) {
+            return lastDay.date() - currentDay.date() + 1;
+        }
+        return currentDay.daysInMonth() - lastDay.date() + 1;
+    };
 
 }
 const helper=new DateHelper();

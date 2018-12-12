@@ -32,7 +32,7 @@ class App extends Component{
             "name":"T02",
             "sheet":[
             {
-            "ticket_id":"1",
+            "ticket_id":1,
             "type":"auto",
             "start":"2018-09-01 00:00",
             "end":"2018-09-01 01:00"
@@ -65,20 +65,63 @@ class App extends Component{
             "type":"auto",
             "start":"2018-09-01 02:00",
             "end":"2018-09-01 03:00"
+            }]
+          },
+            {
+                "name":"J01",
+                "sheet":[
+                    {
+                        "ticket_id":6,
+                        "type":"actual",
+                        "start":"2018-09-01 01:00",
+                        "end":"2018-09-01 02:00"
+                    },
+                    {
+                        "ticket_id":7,
+                        "type":"auto",
+                        "start":"2018-09-01 02:00",
+                        "end":"2018-09-01 23:00"
+                    }]
+            },
+            {
+                "name":"J01",
+                "sheet":[
+                    {
+                        "ticket_id":8,
+                        "type":"actual",
+                        "start":"2018-09-11 01:00",
+                        "end":"2018-09-11 02:00"
+                    },
+                    {
+                        "ticket_id":9,
+                        "type":"auto",
+                        "start":"2018-09-11 02:00",
+                        "end":"2018-09-11 23:00"
+                    }]
             }
         ]
-      }]
 
       }
+    onUpdateTask=(item,props)=>{
+        item.start=props.start;
+        item.end=props.end;
+
+    }
 
       render() {
+        console.log(this.data)
         return (
           <div className="app-container">
             <h1>Getting Started Demo</h1>
             {/* DayWidth<input type="range" min="30" max="500" value={this.state.daysWidth} onChange={this.handleDayWidth} step="1"/>
            Item Height<input type="range" min="30" max="500" value={this.state.itemheight} onChange={this.handleItemHeight} step="1"/> */}
             <div className="time-line-container">
-              <TimeLine data={this.data} links={this.links} searchStartDate={moment('2018-09-01 00:00') } searchEndDate={moment('2018-09-10 00:00') } mode={"day"}/>
+              <TimeLine data={this.data}
+                        links={this.links}
+                        searchStartDate={moment('2018-09-01 00:00') }
+                        searchEndDate={moment('2018-09-11 00:00') }
+                        mode={"day"}
+                        onUpdateTask={this.onUpdateTask}/>
             </div>
           </div>
         );

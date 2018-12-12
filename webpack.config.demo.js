@@ -2,6 +2,7 @@ const path =require('path');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 module.exports ={
   //Where to read where to output
+  devtool: 'inline-source-map',
   entry:'./src/demo/index.js',
   resolve: {
     alias: {

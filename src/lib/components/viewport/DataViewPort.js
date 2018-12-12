@@ -24,6 +24,11 @@ export  class DataViewPort extends Component{
         super(props)
         this.childDragging=false
     }
+    getViewWidth() {
+        if (!this.props.months)
+            return 0;
+        return this.props.months.data.reduce((count, item) => count + item.width, 0);
+    }
     getContainerHeight(rows){
         let new_height=rows>0?rows * this.props.itemheight:10;
         return new_height
@@ -43,12 +48,13 @@ export  class DataViewPort extends Component{
            let new_width = 0;
            let new_position = 0;
            result.push(<DataRow key={i} label={item.name} top={i*this.props.itemheight} left={20} itemheight={this.props.itemheight} >
-                 {item.sheet.map(taskSheet => {
+                 {
+
+                     item.sheet.map((taskSheet) => {
                    //initposition =new_width+new_position;
                    new_position=DateHelper.dateToPixel(taskSheet.start,initposition,this.props.dayWidth,this.props.searchStartDate);
                    new_width=DateHelper.dateToPixel(taskSheet.end,initposition,this.props.dayWidth,this.props.searchStartDate)-new_position;
 
-                  // console.log('nowposition: '+this.props.nowposition+' initposition: '+initposition+' left '+new_position+' width:'+new_width);
                    return(
                      <DataTask item={taskSheet} label={taskSheet.ticket_id}
                                nowposition={this.props.nowposition}
@@ -95,9 +101,13 @@ export  class DataViewPort extends Component{
 
         let height=this.getContainerHeight(this.props.data.length)
         return (
-        <div ref="dataViewPort"  id="timeLinedataViewPort" className="timeLine-main-data-viewPort">
+        <div ref="dataViewPort"  id="timeLinedataViewPort" className="timeLine-main-data-viewPort"
+             onMouseDown={this.doMouseDown}
+             onMouseMove={this.doMouseMove}
+             onMouseUp={this.props.onMouseUp}
+             onMouseLeave ={this.props.onMouseLeave}>
 
-            <div className="timeLine-main-data-container" style={{height:height,width:DATA_CONTAINER_WIDTH,maxWidth:DATA_CONTAINER_WIDTH}}>
+            <div className="timeLine-main-data-container" style={{height:height,width:this.getViewWidth()}}>
                 {this.renderRows()}
 
 
