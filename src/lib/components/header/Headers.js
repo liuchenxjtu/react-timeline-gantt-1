@@ -97,6 +97,7 @@ export default class Header extends Component {
     getHeaderWidth() {
         if (!this.props.months)
             return 0;
+        console.log("month_length", this.props.months.data.reduce((count, item) => count + item.width, 0))
         return this.props.months.data.reduce((count, item) => count + item.width, 0);
     }
         //Render Methods
